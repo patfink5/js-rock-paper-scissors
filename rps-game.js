@@ -7,36 +7,29 @@
 
 const rps = ["rock", "paper", "scissors"];
 
-//Computer Choice
-function getComputerChoice() {
+//Computers Choice
+let pc_selection = (function getComputerChoice() {
 
     let computerChoice = Math.floor(Math.random() * rps.length);
     let computerSelection = rps[computerChoice];
-    console.log(computerSelection);
-}
+    return computerSelection;
+})();
+
+//Players Choice
+let playerSelection = window.prompt("Choose - rock, paper, scissors:", "rock");
+console.log(playerSelection);
+console.log(pc_selection);
+
+//Alert 
 
 
-//Player Choice
-function playerSelection () {
-    console.log("Let's play RPS! 1, 2, 3 ... Shoot!");
-    prompt("Choose - rock, paper, scissors:", "rock");
-}
+
+
+
 
 //Alert
 // function playerSelection () {
 //     console.log("Let's play RPS! 1, 2, 3 ... Shoot!");
 //     prompt("Choose - rock, paper, scissors:", "rock");
 // }
-
-
-//Play Game
-function playRound () {
-    playerSelection ();
-    getComputerChoice();
-    console.log(computerSelection);
-
-
-}
-
-playRound();
 
