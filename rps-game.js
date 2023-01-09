@@ -5,42 +5,63 @@
 //having the pc print it's choice after the user writes 
 //theirs, and then declares a winner.
 
-const rps = ["rock", "paper", "scissors"];
+// To DO: re-read functions page; re-write code to pull correctly
 
-//Computers Choice
-function getComputerChoice() {
-
-    let randomizer = Math.floor(Math.random() * rps.length);
-    let computerChoice = rps[randomizer];
-    return computerChoice;
-};
-
-let computerSelection = getComputerChoice();
-
-//Players Choice
-let playerSelection = window.prompt("Choose - rock, paper, scissors:", "rock");
-
-
-//Single Round
-function playRound(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) {
-       return `It's a tie! you both picked ${playerSelection}`;
-    } else if (playerSelection === "rock" && computerSelection === "scissors") {
-       return "You win! Rock beats Scissors";
-    } else if (playerSelection === "paper" && computerSelection === "rock") {
-       return "You win! Paper beats Rock";
-    } else if (playerSelection === "scissors" && computerSelection === "paper") {
-       return "You win! Scissors beats Paper";
-    } else {
-       return `You lose! ${computerSelection} beats ${playerSelection}`;
+//Set Global
+function computerPlay(compChoice){
+    let choiceNum = Math.floor(Math.random() * 3);
+    if (choiceNum == 0){
+        compChoice.Value = "rock";
     }
- }
+    else if (choiceNum == 1){
+        compChoice.Value = "paper";
+    }
+    else if(choiceNum == 2){
+        compChoice.Value = "scissors";
+    }
+    console.log(choiceNum);
+    return choiceNum;
+}
 
- playRound(playerSelection, computerSelection);
+function playRound(playerChoiceInt, compChoiceInt, compChoice, playerChoice){
+    
+    let win_array = [[0, 2, 1], 
+                     [1, 0, 2], 
+                     [2, 1, 0]];
+    let result = win_array[playerChoiceInt][compChoiceInt];
+    if (result == 0){
+        console.log(`Its a tie! You chose ${playerChoice} and The computer chose ${compChoice.Value}`);
+    }
+    else if (result == 1){
+        console.log(`You won! You chose ${playerChoice} and The computer chose ${compChoice.Value}`);
+    }
+    else if (result == 2){
+        console.log(`You lost! You chose ${playerChoice} and The computer chose ${compChoice.Value}`);
+    }
+}
 
-//Alert
-// function playerSelection () {
-//     console.log("Let's play RPS! 1, 2, 3 ... Shoot!");
-//     prompt("Choose - rock, paper, scissors:", "rock");
-// }
+function game(){
+    let compChoice = {Value: ""};
+    let compChoiceInt;
+    let playerChoiceInt;
+    let playerChoice;
+
+    for (let i = 0; i < 5; i++){
+        playerChoice = prompt("Rock, Paper, or Scissors?").toLowerCase();
+        if (playerChoice == "rock"){
+            playerChoiceInt = 0;
+        }
+        else if (playerChoice == "paper"){
+            playerChoiceInt = 1;
+        }
+        else if (playerChoice == "scissors")
+        {
+            playerChoiceInt = 2;
+        }
+        compChoiceInt = computerPlay(compChoice);
+        playRound(playerChoiceInt, compChoiceInt, compChoice, playerChoice);
+    }
+    
+}
+
 
