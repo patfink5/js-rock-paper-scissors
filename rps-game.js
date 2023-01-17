@@ -7,61 +7,54 @@
 
 // To DO: re-read functions page; re-write code to pull correctly
 
-//Set Global
-function computerPlay(compChoice){
-    let choiceNum = Math.floor(Math.random() * 3);
-    if (choiceNum == 0){
-        compChoice.Value = "rock";
-    }
-    else if (choiceNum == 1){
-        compChoice.Value = "paper";
-    }
-    else if(choiceNum == 2){
-        compChoice.Value = "scissors";
-    }
-    console.log(choiceNum);
-    return choiceNum;
-}
+//Set Globals;
 
-function playRound(playerChoiceInt, compChoiceInt, compChoice, playerChoice){
+function getComputerChoice() {
     
-    let win_array = [[0, 2, 1], 
-                     [1, 0, 2], 
-                     [2, 1, 0]];
-    let result = win_array[playerChoiceInt][compChoiceInt];
-    if (result == 0){
-        console.log(`Its a tie! You chose ${playerChoice} and The computer chose ${compChoice.Value}`);
-    }
-    else if (result == 1){
-        console.log(`You won! You chose ${playerChoice} and The computer chose ${compChoice.Value}`);
-    }
-    else if (result == 2){
-        console.log(`You lost! You chose ${playerChoice} and The computer chose ${compChoice.Value}`);
-    }
+    let intCompChoice;  //Create an random integer between 0 & 2;
+    let charCompChoice;
+
+    intCompChoice = Math.floor(Math.random() * 3);
+
+    if (intCompChoice == 0) {
+        charCompChoice = 'rock'
+      } else if (intCompChoice == 1) {
+        charCompChoice = 'paper'
+      } else {
+        charCompChoice = 'scissors'
+      }
+
+    return charCompChoice;
+    
 }
 
-function game(){
-    let compChoice = {Value: ""};
-    let compChoiceInt;
-    let playerChoiceInt;
+
+function playRound(playerSelection, computerSelection) {
+    if (playerSelection === computerSelection) {
+        return `It's a tie! you both picked ${playerSelection}`;
+     } else if (playerSelection === "rock" && computerSelection === "scissors") {
+        return "You win! Rock beats Scissors";
+     } else if (playerSelection === "paper" && computerSelection === "rock") {
+        return "You win! Paper beats Rock";
+     } else if (playerSelection === "scissors" && computerSelection === "paper") {
+        return "You win! Scissors beats Paper";
+     } else {
+        return `You lose! ${computerSelection} beats ${playerSelection}`;
+     }
+  }
+   
+  //let playerSelection = "rock";
+  //let computerSelection = getComputerChoice();
+  
+
+
+  function game(){
     let playerChoice;
 
     for (let i = 0; i < 5; i++){
-        playerChoice = prompt("Rock, Paper, or Scissors?").toLowerCase();
-        if (playerChoice == "rock"){
-            playerChoiceInt = 0;
-        }
-        else if (playerChoice == "paper"){
-            playerChoiceInt = 1;
-        }
-        else if (playerChoice == "scissors")
-        {
-            playerChoiceInt = 2;
-        }
-        compChoiceInt = computerPlay(compChoice);
-        playRound(playerChoiceInt, compChoiceInt, compChoice, playerChoice);
+        playerSelection = prompt("Rock, Paper, or Scissors?").toLowerCase();
+        let computerSelection = getComputerChoice();
+        console.log(playRound(playerSelection, computerSelection));
     }
     
 }
-
-
